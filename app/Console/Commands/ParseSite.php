@@ -46,7 +46,6 @@ class ParseSite extends Command
                 $article = new Article();
                 $article->title = $node->filter("[class*='opacity-moderate']")->filter(".align-middle")->text();
                 $article->link = $node->filter("a")->attr('href');
-                $article->date = Carbon::createFromIsoFormat('D. MMMM Y, HH.mm \U\h\r', $node->filter("[data-auxiliary]")->text())->toDateString();
                 $article->date = Carbon::parse(str_replace('Uhr', '', $node->filter("[data-auxiliary]")->text()))->format('Y-m-d H:i:s');
                 $article->excerpt = $node->filter('[data-target-teaser-el^="text"]')->text();
                 $article->image_url = $node->filter('[data-image-el^="img"]')->attr('data-src');
